@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You ❤️</title>
+
+<!-- Premium Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background: linear-gradient(160deg,#ff5f8f,#ff3d6e,#ff6fa5);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:#fff;
+}
+
+.card{
+  width:92%;
+  max-width:420px;
+  background: rgba(255,255,255,0.16);
+  backdrop-filter: blur(20px);
+  border-radius:26px;
+  padding:26px;
+  text-align:center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+  animation: fade 0.6s ease;
+}
+
+@keyframes fade{
+  from{opacity:0; transform:translateY(14px)}
+  to{opacity:1; transform:translateY(0)}
+}
+
+.qimg{
+  width:100%;
+  aspect-ratio:1/1;
+  object-fit:cover;
+  border-radius:18px;
+  margin-bottom:18px;
+}
+
+h2{
+  font-size:24px;
+  font-weight:700;
+  margin-bottom:10px;
+}
+
+h3{
+  font-size:20px;
+  font-weight:600;
+  margin-bottom:16px;
+}
+
+p{
+  font-size:15px;
+  opacity:0.92;
+  line-height:1.6;
+}
+
+.btn{
+  width:100%;
+  padding:15px;
+  margin-top:12px;
+  border:none;
+  border-radius:16px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  color:#fff;
+  background: linear-gradient(135deg,#ff9ab8,#ff5f8f);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.25);
+  transition: all 0.25s ease;
+}
+
+.btn:active{
+  transform:scale(0.97);
+}
+
+.shake{
+  animation: shake 0.35s;
+}
+
+@keyframes shake{
+  0%{transform:translateX(0)}
+  25%{transform:translateX(-6px)}
+  50%{transform:translateX(6px)}
+  75%{transform:translateX(-6px)}
+  100%{transform:translateX(0)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="app"></div>
+
+<!-- 🎵 Background Music -->
+<audio id="bgm" src="song.mp3" loop></audio>
+
+<script>
+let step = 0;
+let musicStarted = false;
+
+const steps = [
+
+/* INTRO */
+`
+<h2>Hey Cutie ❤️</h2>
+<p>
+I made something special for you.<br>
+Just answer honestly 😌
+</p>
+<button class="btn" onclick="startMusic(); next()">Start 💕</button>
+`,
+
+/* Q1 */
+`
+<img src="q1.jpg" class="qimg">
+<h3>Tum kidhar ho cutie?</h3>
+<button class="btn" onclick="wrong(this)">Gharpe</button>
+<button class="btn" onclick="next()">Mere man me</button>
+`,
+
+/* Q2 */
+`
+<img src="q2.jpg" class="qimg">
+<h3>Who's more annoying?</h3>
+<button class="btn" onclick="wrong(this)">You</button>
+<button class="btn" onclick="next()">Me</button>
+`,
+
+/* Q3 */
+`
+<img src="q3.jpg" class="qimg">
+<h3>Who is more understanding?</h3>
+<button class="btn" onclick="wrong(this)">Me</button>
+<button class="btn" onclick="next()">You</button>
+`,
+
+/* Q4 */
+`
+<img src="q4.jpg" class="qimg">
+<h3>Who loves more?</h3>
+<button class="btn" onclick="next()">You</button>
+<button class="btn" onclick="wrong(this)">Me</button>
+`,
+
+/* Q5 */
+`
+<img src="q5.jpg" class="qimg">
+<h3>Will you be my Valentine? 🌹</h3>
+<button class="btn" onclick="next()">YES 😍</button>
+<button class="btn" onclick="next()">YESSS 🥰</button>
+`,
+
+/* END */
+`
+<h2>❤️❤️❤️</h2>
+<p>
+I knew it.<br>
+You make my world brighter every day.<br><br>
+Happy Valentine's Day 💖
+</p>
+`
+];
+
+function load(){
+  document.getElementById("app").innerHTML = steps[step];
+}
+
+function next(){
+  step++;
+  load();
+}
+
+function wrong(btn){
+  btn.classList.add("shake");
+  setTimeout(()=>btn.classList.remove("shake"),350);
+}
+
+/* MUSIC START (only once) */
+function startMusic(){
+  if(!musicStarted){
+    const music = document.getElementById("bgm");
+    music.volume = 0.4;
+    music.play();
+    musicStarted = true;
+  }
+}
+
+load();
+</script>
+
+</body>
+</html>
